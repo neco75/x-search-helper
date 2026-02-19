@@ -17,25 +17,19 @@ X（旧Twitter）の高度な検索を簡単に使えるChrome拡張機能です
 
 ## インストール方法
 
-### ソースコードから
+1. [Releases ページ](https://github.com/neco75/x-search-helper/releases) から最新のZIPファイルをダウンロード
 
-1. このリポジトリをダウンロード
+2. ZIPファイルを解凍する
 
-   ```
-   git clone https://github.com/YOUR_USERNAME/x-search-helper.git
-   ```
+3. Chromeで `chrome://extensions` を開く
 
-   または画面上部の「Code」→「Download ZIP」からダウンロード
+4. 右上の「デベロッパーモード」をオンにする
 
-2. Chromeで `chrome://extensions` を開く
+5. 「パッケージ化されていない拡張機能を読み込む」をクリック
 
-3. 右上の「デベロッパーモード」をオンにする
+6. 解凍したフォルダを選択
 
-4. 「パッケージ化されていない拡張機能を読み込む」をクリック
-
-5. ダウンロードしたフォルダを選択
-
-6. ツールバーに拡張機能のアイコンが表示されればインストール完了
+7. ツールバーに拡張機能のアイコンが表示されればインストール完了
 
 ## 使い方
 
