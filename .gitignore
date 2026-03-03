@@ -13,4 +13,5 @@ desktop.ini
 # Artifacts / dev files
 *.md
 !README.md
+!README_en.md
 generate_icons.html
