@@ -1,9 +1,12 @@
 {
   "manifest_version": 3,
   "name": "X Search Helper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "X（旧Twitter）の検索オプションを簡単に使えるChrome拡張機能",
-  "permissions": ["tabs"],
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -16,5 +19,20 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
 }

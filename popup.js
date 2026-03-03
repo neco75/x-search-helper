@@ -539,6 +539,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
+    // =============================================
+    // フォローボタン設定トグル
+    // =============================================
+    const showFollowButton = document.getElementById('showFollowButton');
+
+    // 保存された設定を復元
+    chrome.storage.sync.get({ showFollowButton: false }, (result) => {
+        showFollowButton.checked = result.showFollowButton;
+    });
+
+    // トグル変更時に設定を保存
+    showFollowButton.addEventListener('change', () => {
+        const enabled = showFollowButton.checked;
+        chrome.storage.sync.set({ showFollowButton: enabled }, () => {
+            showToast(enabled ? 'フォローボタンを表示します' : 'フォローボタンを非表示にしました');
+        });
+    });
+
     // 初期状態を設定
     updatePreview();
 });

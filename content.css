@@ -1,0 +1,90 @@
+/* =============================================
+   X Search Helper - Follow Button Styles
+   Xのデザインに溶け込むフォロー/フォロー中ボタン
+   ============================================= */
+
+.xsh-follow-wrapper {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+/* ベースボタン */
+.xsh-follow-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    height: 26px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    line-height: 1;
+    text-decoration: none;
+    vertical-align: middle;
+    min-width: 64px;
+    border: 1px solid transparent;
+}
+
+/* 未フォロー状態 → 白/黒ボタン（Xの通常のフォローボタン） */
+.xsh-follow-btn.xsh-not-following {
+    background: #eff3f4;
+    color: #0f1419;
+    border-color: transparent;
+}
+
+.xsh-follow-btn.xsh-not-following:hover {
+    background: #d7dbdc;
+}
+
+/* フォロー中状態 → アウトラインボタン */
+.xsh-follow-btn.xsh-following {
+    background: transparent;
+    color: #eff3f4;
+    border-color: #536471;
+}
+
+.xsh-follow-btn.xsh-following:hover {
+    background: rgba(244, 33, 46, 0.1);
+    border-color: rgba(244, 33, 46, 0.5);
+    color: #f4212e;
+}
+
+/* フォロー中ホバーで「フォロー解除」に変更 */
+.xsh-follow-btn.xsh-following:hover .xsh-btn-text {
+    font-size: 0;
+    /* テキストを隠す */
+}
+
+.xsh-follow-btn.xsh-following:hover .xsh-btn-text::after {
+    content: 'フォロー解除';
+    font-size: 13px;
+}
+
+/* 読み込み中 */
+.xsh-follow-btn.xsh-loading {
+    background: transparent;
+    color: #71767b;
+    border-color: #2f3336;
+    cursor: default;
+    min-width: 40px;
+}
+
+/* 処理中（API呼び出し中） */
+.xsh-follow-btn.xsh-processing {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.xsh-follow-btn:disabled {
+    cursor: wait;
+}
+
+.xsh-btn-text {
+    pointer-events: none;
+}
