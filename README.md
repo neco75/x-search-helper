@@ -1,5 +1,7 @@
 # X Search Helper
 
+[English](README_en.md) | [日本語](README.md)
+
 X（旧Twitter）の高度な検索を簡単に使えるChrome拡張機能です。
 検索オプションをGUIで選ぶだけで、複雑な検索クエリを自動生成します。
 
