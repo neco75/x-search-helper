@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X Search Helper</title>
+  <title data-i18n="appName">X Search Helper</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 
@@ -17,11 +17,15 @@
           <path fill="currentColor"
             d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
         </svg>
-        <h1>Search Helper</h1>
+        <h1 data-i18n="headerTitle">Search Helper</h1>
       </div>
       <div class="header-actions">
+        <!-- 言語切替ボタン -->
+        <button id="langToggle" class="icon-btn text-btn" title="言語切替 / Language">
+          <span id="currentLangLabel">JA</span>
+        </button>
         <!-- テーマ切替ボタン -->
-        <button id="themeToggle" class="icon-btn" title="テーマ切替">
+        <button id="themeToggle" class="icon-btn" data-i18n-title="themeToggleTitle" title="テーマ切替">
           <svg class="theme-icon-dark" viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor"
               d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
@@ -32,7 +36,7 @@
           </svg>
         </button>
         <!-- リセットボタン -->
-        <button id="resetBtn" class="icon-btn" title="リセット">
+        <button id="resetBtn" class="icon-btn" data-i18n-title="resetBtnTitle" title="リセット">
           <svg viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor"
               d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
@@ -43,8 +47,8 @@
 
     <!-- クエリプレビュー -->
     <div class="preview-section">
-      <div class="preview-label">構築クエリ</div>
-      <div id="queryPreview" class="query-preview">検索オプションを入力してください...</div>
+      <div class="preview-label" data-i18n="queryPreviewLabel">構築クエリ</div>
+      <div id="queryPreview" class="query-preview" data-i18n="queryPreviewDefault">検索オプションを入力してください...</div>
     </div>
 
     <!-- 検索ボタン -->
@@ -54,9 +58,9 @@
           <path fill="currentColor"
             d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
         </svg>
-        Xで検索
+        <span data-i18n="searchBtn">Xで検索</span>
       </button>
-      <button id="copyBtn" class="copy-btn" disabled title="クエリをコピー">
+      <button id="copyBtn" class="copy-btn" disabled data-i18n-title="copyBtnTitle" title="クエリをコピー">
         <svg viewBox="0 0 24 24" width="16" height="16">
           <path fill="currentColor"
             d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -68,13 +72,13 @@
     <div class="settings-section">
       <div class="settings-header">
         <span class="category-icon">⚙️</span>
-        <span class="settings-title">拡張機能設定</span>
+        <span class="settings-title" data-i18n="settingsTitle">拡張機能設定</span>
       </div>
       <div class="settings-content">
         <label class="setting-item" for="showFollowButton">
           <div class="setting-info">
-            <span class="setting-label">➕ フォローボタンを常時表示</span>
-            <span class="setting-desc">タイムラインのポストにフォローボタンを表示します</span>
+            <span class="setting-label" data-i18n="settingFollowBtn">➕ フォローボタンを常時表示</span>
+            <span class="setting-desc" data-i18n="settingFollowBtnDesc">タイムラインのポストにフォローボタンを表示します</span>
           </div>
           <div class="switch-wrapper">
             <input type="checkbox" id="showFollowButton" class="switch-input">
@@ -91,7 +95,7 @@
       <div class="category" data-category="keywords">
         <button class="category-header active">
           <span class="category-icon">🔤</span>
-          <span class="category-title">キーワード・フレーズ</span>
+          <span class="category-title" data-i18n="catKeywords">キーワード・フレーズ</span>
           <svg class="chevron" viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
           </svg>
@@ -99,45 +103,46 @@
         <div class="category-content open">
           <div class="field-group">
             <label>
-              キーワード <span class="hint">スペース区切りでAND検索</span>
+              <span data-i18n="lblKeywords">キーワード</span> <span class="hint"
+                data-i18n="hintKeywordsAND">スペース区切りでAND検索</span>
               <button class="help-btn" data-help="keywords">?</button>
             </label>
-            <input type="text" id="keywords" placeholder="例: プログラミング AI">
+            <input type="text" id="keywords" data-i18n-placeholder="plhKeywords" placeholder="例: プログラミング AI">
           </div>
           <div class="field-group">
             <label>
-              完全一致フレーズ
+              <span data-i18n="lblExactMatch">完全一致フレーズ</span>
               <button class="help-btn" data-help="exact">?</button>
             </label>
-            <input type="text" id="exactPhrase" placeholder="例: 機械学習 入門">
+            <input type="text" id="exactPhrase" data-i18n-placeholder="plhExactMatch" placeholder="例: 機械学習 入門">
           </div>
           <div class="field-group">
             <label>
-              OR検索 <span class="hint">いずれかを含む</span>
+              <span data-i18n="lblOR">OR検索</span> <span class="hint" data-i18n="hintOR">いずれかを含む</span>
               <button class="help-btn" data-help="or">?</button>
             </label>
-            <input type="text" id="orKeywords" placeholder="例: Python,JavaScript（カンマ区切り）">
+            <input type="text" id="orKeywords" data-i18n-placeholder="plhOR" placeholder="例: Python,JavaScript（カンマ区切り）">
           </div>
           <div class="field-group">
             <label>
-              除外キーワード
+              <span data-i18n="lblExclude">除外キーワード</span>
               <button class="help-btn" data-help="exclude">?</button>
             </label>
-            <input type="text" id="excludeKeywords" placeholder="例: 広告,PR（カンマ区切り）">
+            <input type="text" id="excludeKeywords" data-i18n-placeholder="plhExclude" placeholder="例: 広告,PR（カンマ区切り）">
           </div>
           <div class="field-group">
             <label>
-              ハッシュタグ
+              <span data-i18n="lblHashtag">ハッシュタグ</span>
               <button class="help-btn" data-help="hashtag">?</button>
             </label>
-            <input type="text" id="hashtag" placeholder="例: AI（#不要）">
+            <input type="text" id="hashtag" data-i18n-placeholder="plhHashtag" placeholder="例: AI（#不要）">
           </div>
           <div class="field-group">
             <label>
-              キャッシュタグ <span class="hint">株式ティッカーなど</span>
+              <span data-i18n="lblCashtag">キャッシュタグ</span> <span class="hint" data-i18n="hintCashtag">株式ティッカーなど</span>
               <button class="help-btn" data-help="cashtag">?</button>
             </label>
-            <input type="text" id="cashtag" placeholder="例: TSLA（$不要）">
+            <input type="text" id="cashtag" data-i18n-placeholder="plhCashtag" placeholder="例: TSLA（$不要）">
           </div>
         </div>
       </div>
@@ -146,7 +151,7 @@
       <div class="category" data-category="users">
         <button class="category-header">
           <span class="category-icon">👤</span>
-          <span class="category-title">ユーザー指定</span>
+          <span class="category-title" data-i18n="catUsers">ユーザー指定</span>
           <svg class="chevron" viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
           </svg>
@@ -154,29 +159,29 @@
         <div class="category-content">
           <div class="field-group">
             <label>
-              投稿者 <span class="hint">from:</span>
+              <span data-i18n="lblFrom">投稿者</span> <span class="hint">from:</span>
               <button class="help-btn" data-help="from">?</button>
             </label>
-            <input type="text" id="fromUser" placeholder="例: elonmusk（@不要）">
+            <input type="text" id="fromUser" data-i18n-placeholder="plhFrom" placeholder="例: elonmusk（@不要）">
           </div>
           <div class="field-group">
             <label>
-              宛先 <span class="hint">to:</span>
+              <span data-i18n="lblTo">宛先</span> <span class="hint">to:</span>
               <button class="help-btn" data-help="to">?</button>
             </label>
-            <input type="text" id="toUser" placeholder="例: elonmusk（@不要）">
+            <input type="text" id="toUser" data-i18n-placeholder="plhTo" placeholder="例: elonmusk（@不要）">
           </div>
           <div class="field-group">
             <label>
-              メンション <span class="hint">@</span>
+              <span data-i18n="lblMention">メンション</span> <span class="hint">@</span>
               <button class="help-btn" data-help="mention">?</button>
             </label>
-            <input type="text" id="mentionUser" placeholder="例: NASA（@不要）">
+            <input type="text" id="mentionUser" data-i18n-placeholder="plhMention" placeholder="例: NASA（@不要）">
           </div>
           <div class="toggle-group" style="grid-template-columns: 1fr;">
             <label class="toggle-item">
               <input type="checkbox" id="filterFollows">
-              <span class="toggle-label">👥 フォロー中のみ</span>
+              <span class="toggle-label" data-i18n="lblFilterFollows">👥 フォロー中のみ</span>
               <button class="help-btn" data-help="follows">?</button>
             </label>
           </div>
@@ -187,7 +192,7 @@
       <div class="category" data-category="filters">
         <button class="category-header">
           <span class="category-icon">🔍</span>
-          <span class="category-title">コンテンツフィルター</span>
+          <span class="category-title" data-i18n="catFilters">コンテンツフィルター</span>
           <svg class="chevron" viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
           </svg>
@@ -196,51 +201,51 @@
           <div class="toggle-group">
             <label class="toggle-item">
               <input type="checkbox" id="filterImages">
-              <span class="toggle-label">🖼️ 画像を含む</span>
+              <span class="toggle-label" data-i18n="lblFilterImages">🖼️ 画像を含む</span>
               <button class="help-btn" data-help="filterImages">?</button>
             </label>
             <label class="toggle-item">
               <input type="checkbox" id="filterVideos">
-              <span class="toggle-label">🎬 動画を含む</span>
+              <span class="toggle-label" data-i18n="lblFilterVideos">🎬 動画を含む</span>
               <button class="help-btn" data-help="filterVideos">?</button>
             </label>
             <label class="toggle-item">
               <input type="checkbox" id="filterMedia">
-              <span class="toggle-label">📎 メディア全般</span>
+              <span class="toggle-label" data-i18n="lblFilterMedia">📎 メディア全般</span>
               <button class="help-btn" data-help="filterMedia">?</button>
             </label>
             <label class="toggle-item">
               <input type="checkbox" id="filterLinks">
-              <span class="toggle-label">🔗 リンクを含む</span>
+              <span class="toggle-label" data-i18n="lblFilterLinks">🔗 リンクを含む</span>
               <button class="help-btn" data-help="filterLinks">?</button>
             </label>
             <label class="toggle-item">
               <input type="checkbox" id="filterVerified">
-              <span class="toggle-label">✅ 認証済みのみ</span>
+              <span class="toggle-label" data-i18n="lblFilterVerified">✅ 認証済みのみ</span>
               <button class="help-btn" data-help="filterVerified">?</button>
             </label>
             <label class="toggle-item">
               <input type="checkbox" id="excludeReplies">
-              <span class="toggle-label">💬 リプライ除外</span>
+              <span class="toggle-label" data-i18n="lblExcludeReplies">💬 リプライ除外</span>
               <button class="help-btn" data-help="excludeReplies">?</button>
             </label>
             <label class="toggle-item">
               <input type="checkbox" id="excludeRetweets">
-              <span class="toggle-label">🔄 リツイート除外</span>
+              <span class="toggle-label" data-i18n="lblExcludeRetweets">🔄 リツイート除外</span>
               <button class="help-btn" data-help="excludeRetweets">?</button>
             </label>
             <label class="toggle-item">
               <input type="checkbox" id="filterQuote">
-              <span class="toggle-label">💭 引用のみ</span>
+              <span class="toggle-label" data-i18n="lblFilterQuote">💭 引用のみ</span>
               <button class="help-btn" data-help="filterQuote">?</button>
             </label>
           </div>
           <div class="field-group">
             <label>
-              URL指定 <span class="hint">url:</span>
+              <span data-i18n="lblUrl">URL指定</span> <span class="hint">url:</span>
               <button class="help-btn" data-help="url">?</button>
             </label>
-            <input type="text" id="urlFilter" placeholder="例: example.com">
+            <input type="text" id="urlFilter" data-i18n-placeholder="plhUrl" placeholder="例: example.com">
           </div>
         </div>
       </div>
@@ -249,7 +254,7 @@
       <div class="category" data-category="dates">
         <button class="category-header">
           <span class="category-icon">📅</span>
-          <span class="category-title">日付指定</span>
+          <span class="category-title" data-i18n="catDates">日付指定</span>
           <svg class="chevron" viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
           </svg>
@@ -257,14 +262,14 @@
         <div class="category-content">
           <div class="field-group">
             <label>
-              開始日 <span class="hint">since:</span>
+              <span data-i18n="lblSince">開始日</span> <span class="hint">since:</span>
               <button class="help-btn" data-help="since">?</button>
             </label>
             <input type="date" id="sinceDate">
           </div>
           <div class="field-group">
             <label>
-              終了日 <span class="hint">until:</span>
+              <span data-i18n="lblUntil">終了日</span> <span class="hint">until:</span>
               <button class="help-btn" data-help="until">?</button>
             </label>
             <input type="date" id="untilDate">
@@ -276,7 +281,7 @@
       <div class="category" data-category="engagement">
         <button class="category-header">
           <span class="category-icon">📊</span>
-          <span class="category-title">エンゲージメント</span>
+          <span class="category-title" data-i18n="catEngagement">エンゲージメント</span>
           <svg class="chevron" viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
           </svg>
@@ -284,24 +289,24 @@
         <div class="category-content">
           <div class="field-group">
             <label>
-              最小いいね数 <span class="hint">min_faves:</span>
+              <span data-i18n="lblMinFaves">最小いいね数</span> <span class="hint">min_faves:</span>
               <button class="help-btn" data-help="minFaves">?</button>
             </label>
-            <input type="number" id="minFaves" min="0" placeholder="例: 100">
+            <input type="number" id="minFaves" min="0" data-i18n-placeholder="plhMinFaves" default="例: 100">
           </div>
           <div class="field-group">
             <label>
-              最小リツイート数 <span class="hint">min_retweets:</span>
+              <span data-i18n="lblMinRetweets">最小リツイート数</span> <span class="hint">min_retweets:</span>
               <button class="help-btn" data-help="minRetweets">?</button>
             </label>
-            <input type="number" id="minRetweets" min="0" placeholder="例: 50">
+            <input type="number" id="minRetweets" min="0" data-i18n-placeholder="plhMinRetweets" placeholder="例: 50">
           </div>
           <div class="field-group">
             <label>
-              最小リプライ数 <span class="hint">min_replies:</span>
+              <span data-i18n="lblMinReplies">最小リプライ数</span> <span class="hint">min_replies:</span>
               <button class="help-btn" data-help="minReplies">?</button>
             </label>
-            <input type="number" id="minReplies" min="0" placeholder="例: 10">
+            <input type="number" id="minReplies" min="0" data-i18n-placeholder="plhMinReplies" placeholder="例: 10">
           </div>
         </div>
       </div>
@@ -310,7 +315,7 @@
       <div class="category" data-category="locale">
         <button class="category-header">
           <span class="category-icon">🌐</span>
-          <span class="category-title">言語・位置情報</span>
+          <span class="category-title" data-i18n="catLocale">言語・位置情報</span>
           <svg class="chevron" viewBox="0 0 24 24" width="16" height="16">
             <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
           </svg>
@@ -318,11 +323,11 @@
         <div class="category-content">
           <div class="field-group">
             <label>
-              言語 <span class="hint">lang:</span>
+              <span data-i18n="lblLang">言語</span> <span class="hint">lang:</span>
               <button class="help-btn" data-help="lang">?</button>
             </label>
             <select id="langFilter">
-              <option value="">指定なし</option>
+              <option value="" data-i18n="optLangAny">指定なし</option>
               <option value="ja">日本語 (ja)</option>
               <option value="en">English (en)</option>
               <option value="es">Español (es)</option>
@@ -339,17 +344,17 @@
           </div>
           <div class="field-group">
             <label>
-              場所付近 <span class="hint">near:</span>
+              <span data-i18n="lblNear">場所付近</span> <span class="hint">near:</span>
               <button class="help-btn" data-help="near">?</button>
             </label>
-            <input type="text" id="nearCity" placeholder="例: Tokyo">
+            <input type="text" id="nearCity" data-i18n-placeholder="plhNear" placeholder="例: Tokyo">
           </div>
           <div class="field-group">
             <label>
-              範囲 <span class="hint">within:</span>
+              <span data-i18n="lblWithin">範囲</span> <span class="hint">within:</span>
               <button class="help-btn" data-help="within">?</button>
             </label>
-            <input type="text" id="withinDistance" placeholder="例: 10km">
+            <input type="text" id="withinDistance" data-i18n-placeholder="plhWithin" placeholder="例: 10km">
           </div>
         </div>
       </div>
@@ -368,7 +373,7 @@
 
     <!-- フッター -->
     <footer class="footer">
-      <a href="https://ko-fi.com/neco75" target="_blank" class="donate-btn">☕ 応援する</a>
+      <a href="https://ko-fi.com/neco75" target="_blank" class="donate-btn" data-i18n="donateBtn">☕ 応援する</a>
       <span>X Search Helper v1.3</span>
     </footer>
   </div>

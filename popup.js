@@ -4,6 +4,73 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // カスタム辞書データ
+    let currentMessages = {};
+
+    // =============================================
+    // 言語設定と言語切り替え（i18nからfetchへの移行）
+    // =============================================
+    const langToggle = document.getElementById('langToggle');
+    const currentLangLabel = document.getElementById('currentLangLabel');
+
+    // システムの言語を取得して初期値を決定
+    function getDefaultLang() {
+        return chrome.i18n.getUILanguage().startsWith('ja') ? 'ja' : 'en';
+    }
+
+    async function loadTranslations(lang) {
+        try {
+            const response = await fetch(chrome.runtime.getURL(`_locales/${lang}/messages.json`));
+            currentMessages = await response.json();
+
+            // UIのテキストを更新
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (currentMessages[key] && currentMessages[key].message) {
+                    el.innerHTML = currentMessages[key].message;
+                }
+            });
+            document.querySelectorAll('[data-i18n-title]').forEach(el => {
+                const key = el.getAttribute('data-i18n-title');
+                if (currentMessages[key] && currentMessages[key].message) {
+                    el.title = currentMessages[key].message;
+                }
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (currentMessages[key] && currentMessages[key].message) {
+                    el.placeholder = currentMessages[key].message;
+                }
+            });
+
+            // ラベルの更新
+            currentLangLabel.textContent = lang.toUpperCase();
+
+            // プレビューの再描画
+            updatePreview();
+        } catch (e) {
+            console.error('Failed to load translations:', e);
+        }
+    }
+
+    // `getMessage` を `chrome.i18n` の代わりに機能させるラッパー関数
+    function getMessage(key) {
+        return (currentMessages[key] && currentMessages[key].message) || '';
+    }
+
+    // 初期化と言語切り替えイベント
+    chrome.storage.sync.get({ appLang: getDefaultLang() }, (result) => {
+        let currentLang = result.appLang;
+        loadTranslations(currentLang);
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'ja' ? 'en' : 'ja';
+            chrome.storage.sync.set({ appLang: currentLang }, () => {
+                loadTranslations(currentLang);
+            });
+        });
+    });
+
     // DOM要素の取得
     const queryPreview = document.getElementById('queryPreview');
     const searchBtn = document.getElementById('searchBtn');
@@ -47,171 +114,36 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // =============================================
-    // ヘルプリファレンスデータ
+    // ヘルプリファレンスデータ (Syntax mapping only)
     // =============================================
-    const helpData = {
-        keywords: {
-            title: 'キーワード検索（AND）',
-            syntax: 'word1 word2',
-            desc: '複数のキーワードを<strong>全て含む</strong>ポストを検索します。スペースで区切ります。',
-            example: '例: <strong>プログラミング AI</strong> → 「プログラミング」と「AI」の両方を含むポスト'
-        },
-        exact: {
-            title: '完全一致検索',
-            syntax: '"exact phrase"',
-            desc: '指定したフレーズに<strong>完全一致</strong>するポストを検索します。語順も一致する必要があります。',
-            example: '例: <strong>"機械学習 入門"</strong> → 「機械学習 入門」という並びを含むポスト'
-        },
-        or: {
-            title: 'OR検索',
-            syntax: 'word1 OR word2',
-            desc: '指定したキーワードの<strong>いずれか</strong>を含むポストを検索します。カンマで区切って入力してください。',
-            example: '例: <strong>Python,JavaScript</strong> → 「Python OR JavaScript」に変換'
-        },
-        exclude: {
-            title: '除外検索',
-            syntax: '-word',
-            desc: '指定したキーワードを<strong>含まない</strong>ポストに絞り込みます。カンマで区切って複数指定可能。',
-            example: '例: <strong>広告,PR</strong> → 「-広告 -PR」に変換'
-        },
-        hashtag: {
-            title: 'ハッシュタグ検索',
-            syntax: '#hashtag',
-            desc: '特定の<strong>ハッシュタグ</strong>を含むポストを検索します。#は自動的に付与されます。',
-            example: '例: <strong>AI</strong> → 「#AI」を含むポスト'
-        },
-        cashtag: {
-            title: 'キャッシュタグ検索',
-            syntax: '$SYMBOL',
-            desc: '<strong>株式ティッカーシンボル</strong>など、$記号で始まるタグを検索します。$は自動付与。',
-            example: '例: <strong>TSLA</strong> → 「$TSLA」を含むポスト'
-        },
-        from: {
-            title: '投稿者検索',
-            syntax: 'from:username',
-            desc: '特定のユーザーが<strong>投稿した</strong>ポストのみを検索します。@は不要です。',
-            example: '例: <strong>elonmusk</strong> → @elonmuskのポストのみ'
-        },
-        to: {
-            title: '宛先検索',
-            syntax: 'to:username',
-            desc: '特定のユーザーに<strong>返信した</strong>ポストを検索します。',
-            example: '例: <strong>elonmusk</strong> → @elonmusk宛てのリプライ'
-        },
-        mention: {
-            title: 'メンション検索',
-            syntax: '@username',
-            desc: '特定のユーザーが<strong>言及された</strong>ポストを検索します。',
-            example: '例: <strong>NASA</strong> → @NASAが言及されたポスト'
-        },
-        follows: {
-            title: 'フォロー中のみ',
-            syntax: 'filter:follows',
-            desc: '自分が<strong>フォローしている</strong>アカウントのポストのみに絞り込みます。',
-            example: '※ ログイン中のアカウントのフォロー対象が反映されます'
-        },
-        filterImages: {
-            title: '画像フィルター',
-            syntax: 'filter:images',
-            desc: '<strong>画像を含む</strong>ポストのみを表示します。',
-            example: '写真やイラストが含まれるポストを検索したい時に便利'
-        },
-        filterVideos: {
-            title: '動画フィルター',
-            syntax: 'filter:videos',
-            desc: '<strong>動画を含む</strong>ポストのみを表示します。YouTubeリンクを含むポストも対象。',
-            example: '動画コンテンツを探したい時に使用'
-        },
-        filterMedia: {
-            title: 'メディアフィルター',
-            syntax: 'filter:media',
-            desc: '画像・動画・GIFなど<strong>何らかのメディア</strong>を含むポストを表示します。',
-            example: 'テキストのみのポストを除外したい時に便利'
-        },
-        filterLinks: {
-            title: 'リンクフィルター',
-            syntax: 'filter:links',
-            desc: '<strong>URLを含む</strong>ポストのみを表示します。',
-            example: '外部リンクが共有されているポストを検索'
-        },
-        filterVerified: {
-            title: '認証済みフィルター',
-            syntax: 'filter:verified',
-            desc: '<strong>認証バッジ付き</strong>アカウントのポストのみを表示します。',
-            example: '公式・認証アカウントの投稿に絞りたい時に'
-        },
-        excludeReplies: {
-            title: 'リプライ除外',
-            syntax: '-filter:replies',
-            desc: 'リプライ（返信）を<strong>除外</strong>して、元のポストのみを表示します。',
-            example: '会話ではなく独立したポストだけを見たい時に'
-        },
-        excludeRetweets: {
-            title: 'リツイート除外',
-            syntax: '-filter:retweets',
-            desc: 'リツイート（リポスト）を<strong>除外</strong>して、オリジナルのポストのみを表示します。',
-            example: '重複を減らしてオリジナルの投稿だけを見たい時に'
-        },
-        filterQuote: {
-            title: '引用ツイートのみ',
-            syntax: 'filter:quote',
-            desc: '<strong>引用ツイート</strong>（引用リポスト）のみを表示します。',
-            example: '他の人のポストに対するコメント付きリポストを検索'
-        },
-        url: {
-            title: 'URL指定検索',
-            syntax: 'url:keyword',
-            desc: '特定の<strong>URLを含む</strong>ポストを検索します。ドメイン名やURLの一部を入力。',
-            example: '例: <strong>example.com</strong> → example.comへのリンクを含むポスト'
-        },
-        since: {
-            title: '開始日指定',
-            syntax: 'since:YYYY-MM-DD',
-            desc: '指定した日付<strong>以降</strong>のポストを検索します。',
-            example: '例: 2025-01-01 → 2025年1月1日以降のポスト'
-        },
-        until: {
-            title: '終了日指定',
-            syntax: 'until:YYYY-MM-DD',
-            desc: '指定した日付<strong>以前</strong>のポストを検索します。since:と組み合わせて期間指定が可能。',
-            example: '例: since:2025-01-01 + until:2025-12-31 → 2025年のポスト'
-        },
-        minFaves: {
-            title: '最小いいね数',
-            syntax: 'min_faves:N',
-            desc: '指定した数<strong>以上のいいね</strong>があるポストのみを表示します。',
-            example: '例: <strong>100</strong> → 100いいね以上のポスト（バズったポストを探すのに便利）'
-        },
-        minRetweets: {
-            title: '最小リツイート数',
-            syntax: 'min_retweets:N',
-            desc: '指定した数<strong>以上のリツイート</strong>があるポストのみを表示します。',
-            example: '例: <strong>50</strong> → 50RT以上の拡散されたポスト'
-        },
-        minReplies: {
-            title: '最小リプライ数',
-            syntax: 'min_replies:N',
-            desc: '指定した数<strong>以上のリプライ</strong>があるポストのみを表示します。',
-            example: '例: <strong>10</strong> → 10件以上の返信がある議論の盛り上がったポスト'
-        },
-        lang: {
-            title: '言語指定',
-            syntax: 'lang:code',
-            desc: '指定した<strong>言語</strong>のポストのみを表示します。ISO 639-1言語コードを使用。',
-            example: '例: <strong>ja</strong> → 日本語のポストのみ'
-        },
-        near: {
-            title: '場所指定',
-            syntax: 'near:city',
-            desc: '指定した<strong>都市・場所の近く</strong>から投稿されたポストを検索します。',
-            example: '例: <strong>Tokyo</strong> → 東京付近からの投稿（※精度は限定的）'
-        },
-        within: {
-            title: '範囲指定',
-            syntax: 'within:distance',
-            desc: '<strong>near:と組み合わせて</strong>、検索範囲の半径を指定します。kmまたはmiが使用可能。',
-            example: '例: <strong>10km</strong> → near:で指定した場所から半径10km以内'
-        }
+    const helpSyntax = {
+        keywords: 'word1 word2',
+        exact: '"exact phrase"',
+        or: 'word1 OR word2',
+        exclude: '-word',
+        hashtag: '#hashtag',
+        cashtag: '$SYMBOL',
+        from: 'from:username',
+        to: 'to:username',
+        mention: '@username',
+        follows: 'filter:follows',
+        filterImages: 'filter:images',
+        filterVideos: 'filter:videos',
+        filterMedia: 'filter:media',
+        filterLinks: 'filter:links',
+        filterVerified: 'filter:verified',
+        excludeReplies: '-filter:replies',
+        excludeRetweets: '-filter:retweets',
+        filterQuote: 'filter:quote',
+        url: 'url:keyword',
+        since: 'since:YYYY-MM-DD',
+        until: 'until:YYYY-MM-DD',
+        minFaves: 'min_faves:N',
+        minRetweets: 'min_retweets:N',
+        minReplies: 'min_replies:N',
+        lang: 'lang:code',
+        near: 'near:city',
+        within: 'within:distance'
     };
 
     // =============================================
@@ -245,14 +177,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const helpClose = document.getElementById('helpClose');
 
     function showHelp(key) {
-        const data = helpData[key];
-        if (!data) return;
+        const title = getMessage(`help_${key}_title`);
+        const desc = getMessage(`help_${key}_desc`);
+        const example = getMessage(`help_${key}_example`);
 
-        helpTitle.textContent = data.title;
+        if (!title) return; // key mismatch
+
+        helpTitle.innerHTML = title;
         helpBody.innerHTML = `
-            <div class="help-desc">${data.desc}</div>
-            <code class="help-syntax">${data.syntax}</code>
-            <div class="help-example">${data.example}</div>
+            <div class="help-desc">${desc}</div>
+            <code class="help-syntax">${helpSyntax[key]}</code>
+            <div class="help-example">${example}</div>
         `;
 
         helpPopover.style.display = 'block';
@@ -440,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const query = buildQuery();
         const hasQuery = query.length > 0;
 
-        queryPreview.textContent = hasQuery ? query : '検索オプションを入力してください...';
+        queryPreview.textContent = hasQuery ? query : getMessage('queryPreviewDefault');
         queryPreview.classList.toggle('active', hasQuery);
         searchBtn.disabled = !hasQuery;
         copyBtn.disabled = !hasQuery;
@@ -477,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             await navigator.clipboard.writeText(query);
             copyBtn.classList.add('copied');
-            showToast('クエリをコピーしました');
+            showToast(getMessage("toastCopied"));
             setTimeout(() => {
                 copyBtn.classList.remove('copied');
             }, 2000);
@@ -490,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.execCommand('copy');
             document.body.removeChild(textarea);
             copyBtn.classList.add('copied');
-            showToast('クエリをコピーしました');
+            showToast(getMessage("toastCopied"));
             setTimeout(() => {
                 copyBtn.classList.remove('copied');
             }, 2000);
@@ -514,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         updatePreview();
-        showToast('リセットしました');
+        showToast(getMessage("toastReset"));
     });
 
     // =============================================
@@ -553,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showFollowButton.addEventListener('change', () => {
         const enabled = showFollowButton.checked;
         chrome.storage.sync.set({ showFollowButton: enabled }, () => {
-            showToast(enabled ? 'フォローボタンを表示します' : 'フォローボタンを非表示にしました');
+            showToast(enabled ? getMessage("toastFollowOn") : getMessage("toastFollowOff"));
         });
     });
 

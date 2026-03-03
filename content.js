@@ -17,16 +17,46 @@
     let pendingUsernames = new Set();
     let lookupTimer = null;
 
+    // 言語設定と辞書データ
+    let currentLang = 'ja';
+    let currentMessages = {};
+
     // X内部APIのBearerトークン（X Web App共通）
     const BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA';
 
     // =============================================
-    // 設定の読み込み
+    // 設定と言語辞書の読み込み
     // =============================================
+    function getDefaultLang() {
+        // コンテンツスクリプトではchrome.i18n.getUILanguage()が使えるが、ブラウザ依存になるため一応判定
+        return chrome.i18n.getUILanguage().startsWith('ja') ? 'ja' : 'en';
+    }
+
+    async function loadTranslations(lang) {
+        try {
+            const url = chrome.runtime.getURL(`_locales/${lang}/messages.json`);
+            const response = await fetch(url);
+            if (response.ok) {
+                currentMessages = await response.json();
+            }
+        } catch (e) {
+            console.error('[X Search Helper] Failed to load translations:', e);
+        }
+    }
+
+    function getMessage(key) {
+        return (currentMessages[key] && currentMessages[key].message) || '';
+    }
+
     function loadSettings() {
         return new Promise((resolve) => {
-            chrome.storage.sync.get({ showFollowButton: false }, (result) => {
+            chrome.storage.sync.get({
+                showFollowButton: false,
+                appLang: getDefaultLang()
+            }, async (result) => {
                 isEnabled = result.showFollowButton;
+                currentLang = result.appLang;
+                await loadTranslations(currentLang);
                 resolve(isEnabled);
             });
         });
@@ -154,14 +184,30 @@
         if (isFollowing) {
             btn.classList.add('xsh-following');
             btn.classList.remove('xsh-not-following');
-            btn.innerHTML = `<span class="xsh-btn-text">フォロー中</span>`;
-            btn.title = 'フォロー解除';
+            btn.innerHTML = `<span class="xsh-btn-text" data-text-unfollow="${getMessage('btnUnfollow')}">${getMessage('btnFollowing')}</span>`;
+            btn.title = getMessage('titleUnfollow');
         } else {
             btn.classList.remove('xsh-following');
             btn.classList.add('xsh-not-following');
-            btn.innerHTML = `<span class="xsh-btn-text">フォロー</span>`;
-            btn.title = 'フォローする';
+            btn.innerHTML = `<span class="xsh-btn-text">${getMessage('btnFollow')}</span>`;
+            btn.title = getMessage('titleFollow');
         }
+    }
+
+    // すべてのフォローボタンのテキストを現在の言語に更新する
+    function refreshAllButtonTexts() {
+        document.querySelectorAll('.xsh-follow-btn').forEach(btn => {
+            const username = btn.getAttribute('data-xsh-username');
+            if (btn.classList.contains('xsh-loading')) {
+                btn.innerHTML = `<span class="xsh-btn-text">${getMessage('btnLoading')}</span>`;
+                btn.title = getMessage('btnLoading');
+            } else {
+                const cached = followCache.get(username);
+                if (cached !== undefined) {
+                    updateButtonState(btn, cached.following);
+                }
+            }
+        });
     }
 
     // =============================================
@@ -173,8 +219,8 @@
         btn.setAttribute('data-xsh-username', username.toLowerCase());
 
         // 読み込み中状態
-        btn.innerHTML = `<span class="xsh-btn-text">...</span>`;
-        btn.title = '読み込み中...';
+        btn.innerHTML = `<span class="xsh-btn-text">${getMessage('btnLoading')}</span>`;
+        btn.title = getMessage('btnLoading');
 
         // キャッシュがあれば即座に反映
         const cached = followCache.get(username.toLowerCase());
@@ -313,14 +359,25 @@
     // =============================================
     // 設定変更のリスナー
     // =============================================
-    chrome.storage.onChanged.addListener((changes, namespace) => {
+    chrome.storage.onChanged.addListener(async (changes, namespace) => {
         if (namespace !== 'sync') return;
+
+        // フォローボタン表示設定が変更された場合
         if (changes.showFollowButton) {
             isEnabled = changes.showFollowButton.newValue;
             if (isEnabled) {
                 processAllArticles();
             } else {
                 removeAllFollowButtons();
+            }
+        }
+
+        // 言語設定が変更された場合
+        if (changes.appLang && changes.appLang.newValue !== currentLang) {
+            currentLang = changes.appLang.newValue;
+            await loadTranslations(currentLang);
+            if (isEnabled) {
+                refreshAllButtonTexts();
             }
         }
     });

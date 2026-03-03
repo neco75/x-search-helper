@@ -1,0 +1,470 @@
+{
+    "appName": {
+        "message": "X Search Helper"
+    },
+    "appDesc": {
+        "message": "X（旧Twitter）の検索オプションを簡単に使えるChrome拡張機能"
+    },
+    "headerTitle": {
+        "message": "Search Helper"
+    },
+    "themeToggleTitle": {
+        "message": "テーマ切替"
+    },
+    "resetBtnTitle": {
+        "message": "リセット"
+    },
+    "queryPreviewLabel": {
+        "message": "構築クエリ"
+    },
+    "queryPreviewDefault": {
+        "message": "検索オプションを入力してください..."
+    },
+    "searchBtn": {
+        "message": "Xで検索"
+    },
+    "copyBtnTitle": {
+        "message": "クエリをコピー"
+    },
+    "settingsTitle": {
+        "message": "拡張機能設定"
+    },
+    "settingFollowBtn": {
+        "message": "➕ フォローボタンを常時表示"
+    },
+    "settingFollowBtnDesc": {
+        "message": "タイムラインのポストにフォローボタンを表示します"
+    },
+    "catKeywords": {
+        "message": "キーワード・フレーズ"
+    },
+    "lblKeywords": {
+        "message": "キーワード"
+    },
+    "hintKeywordsAND": {
+        "message": "スペース区切りでAND検索"
+    },
+    "plhKeywords": {
+        "message": "例: プログラミング AI"
+    },
+    "lblExactMatch": {
+        "message": "完全一致フレーズ"
+    },
+    "plhExactMatch": {
+        "message": "例: 機械学習 入門"
+    },
+    "lblOR": {
+        "message": "OR検索"
+    },
+    "hintOR": {
+        "message": "いずれかを含む"
+    },
+    "plhOR": {
+        "message": "例: Python,JavaScript（カンマ区切り）"
+    },
+    "lblExclude": {
+        "message": "除外キーワード"
+    },
+    "plhExclude": {
+        "message": "例: 広告,PR（カンマ区切り）"
+    },
+    "lblHashtag": {
+        "message": "ハッシュタグ"
+    },
+    "plhHashtag": {
+        "message": "例: AI（#不要）"
+    },
+    "lblCashtag": {
+        "message": "キャッシュタグ"
+    },
+    "hintCashtag": {
+        "message": "株式ティッカーなど"
+    },
+    "plhCashtag": {
+        "message": "例: TSLA（$不要）"
+    },
+    "catUsers": {
+        "message": "ユーザー指定"
+    },
+    "lblFrom": {
+        "message": "投稿者"
+    },
+    "plhFrom": {
+        "message": "例: elonmusk（@不要）"
+    },
+    "lblTo": {
+        "message": "宛先"
+    },
+    "plhTo": {
+        "message": "例: elonmusk（@不要）"
+    },
+    "lblMention": {
+        "message": "メンション"
+    },
+    "plhMention": {
+        "message": "例: NASA（@不要）"
+    },
+    "lblFilterFollows": {
+        "message": "👥 フォロー中のみ"
+    },
+    "catFilters": {
+        "message": "コンテンツフィルター"
+    },
+    "lblFilterImages": {
+        "message": "🖼️ 画像を含む"
+    },
+    "lblFilterVideos": {
+        "message": "🎬 動画を含む"
+    },
+    "lblFilterMedia": {
+        "message": "📎 メディア全般"
+    },
+    "lblFilterLinks": {
+        "message": "🔗 リンクを含む"
+    },
+    "lblFilterVerified": {
+        "message": "✅ 認証済みのみ"
+    },
+    "lblExcludeReplies": {
+        "message": "💬 リプライ除外"
+    },
+    "lblExcludeRetweets": {
+        "message": "🔄 リツイート除外"
+    },
+    "lblFilterQuote": {
+        "message": "💭 引用のみ"
+    },
+    "lblUrl": {
+        "message": "URL指定"
+    },
+    "plhUrl": {
+        "message": "例: example.com"
+    },
+    "catDates": {
+        "message": "日付指定"
+    },
+    "lblSince": {
+        "message": "開始日"
+    },
+    "lblUntil": {
+        "message": "終了日"
+    },
+    "catEngagement": {
+        "message": "エンゲージメント"
+    },
+    "lblMinFaves": {
+        "message": "最小いいね数"
+    },
+    "plhMinFaves": {
+        "message": "例: 100"
+    },
+    "lblMinRetweets": {
+        "message": "最小リツイート数"
+    },
+    "plhMinRetweets": {
+        "message": "例: 50"
+    },
+    "lblMinReplies": {
+        "message": "最小リプライ数"
+    },
+    "plhMinReplies": {
+        "message": "例: 10"
+    },
+    "catLocale": {
+        "message": "言語・位置情報"
+    },
+    "lblLang": {
+        "message": "言語"
+    },
+    "optLangAny": {
+        "message": "指定なし"
+    },
+    "lblNear": {
+        "message": "場所付近"
+    },
+    "plhNear": {
+        "message": "例: Tokyo"
+    },
+    "lblWithin": {
+        "message": "範囲"
+    },
+    "plhWithin": {
+        "message": "例: 10km"
+    },
+    "donateBtn": {
+        "message": "☕ 応援する"
+    },
+    "toastCopied": {
+        "message": "クエリをコピーしました"
+    },
+    "toastReset": {
+        "message": "リセットしました"
+    },
+    "toastFollowOn": {
+        "message": "フォローボタンを表示します"
+    },
+    "toastFollowOff": {
+        "message": "フォローボタンを非表示にしました"
+    },
+    "btnFollow": {
+        "message": "フォロー"
+    },
+    "btnFollowing": {
+        "message": "フォロー中"
+    },
+    "btnUnfollow": {
+        "message": "フォロー解除"
+    },
+    "btnLoading": {
+        "message": "読み込み中..."
+    },
+    "titleFollow": {
+        "message": "フォローする"
+    },
+    "titleUnfollow": {
+        "message": "フォロー解除"
+    },
+    "help_keywords_title": {
+        "message": "キーワード検索（AND）"
+    },
+    "help_keywords_desc": {
+        "message": "複数のキーワードを<strong>全て含む</strong>ポストを検索します。スペースで区切ります。"
+    },
+    "help_keywords_example": {
+        "message": "例: <strong>プログラミング AI</strong> → 「プログラミング」と「AI」の両方を含むポスト"
+    },
+    "help_exact_title": {
+        "message": "完全一致検索"
+    },
+    "help_exact_desc": {
+        "message": "指定したフレーズに<strong>完全一致</strong>するポストを検索します。語順も一致する必要があります。"
+    },
+    "help_exact_example": {
+        "message": "例: <strong>\"機械学習 入門\"</strong> → 「機械学習 入門」という並びを含むポスト"
+    },
+    "help_or_title": {
+        "message": "OR検索"
+    },
+    "help_or_desc": {
+        "message": "指定したキーワードの<strong>いずれか</strong>を含むポストを検索します。カンマで区切って入力してください。"
+    },
+    "help_or_example": {
+        "message": "例: <strong>Python,JavaScript</strong> → 「Python OR JavaScript」に変換"
+    },
+    "help_exclude_title": {
+        "message": "除外検索"
+    },
+    "help_exclude_desc": {
+        "message": "指定したキーワードを<strong>含まない</strong>ポストに絞り込みます。カンマで区切って複数指定可能。"
+    },
+    "help_exclude_example": {
+        "message": "例: <strong>広告,PR</strong> → 「-広告 -PR」に変換"
+    },
+    "help_hashtag_title": {
+        "message": "ハッシュタグ検索"
+    },
+    "help_hashtag_desc": {
+        "message": "特定の<strong>ハッシュタグ</strong>を含むポストを検索します。#は自動的に付与されます。"
+    },
+    "help_hashtag_example": {
+        "message": "例: <strong>AI</strong> → 「#AI」を含むポスト"
+    },
+    "help_cashtag_title": {
+        "message": "キャッシュタグ検索"
+    },
+    "help_cashtag_desc": {
+        "message": "<strong>株式ティッカーシンボル</strong>など、$記号で始まるタグを検索します。$は自動付与。"
+    },
+    "help_cashtag_example": {
+        "message": "例: <strong>TSLA</strong> → 「$TSLA」を含むポスト"
+    },
+    "help_from_title": {
+        "message": "投稿者検索"
+    },
+    "help_from_desc": {
+        "message": "特定のユーザーが<strong>投稿した</strong>ポストのみを検索します。@は不要です。"
+    },
+    "help_from_example": {
+        "message": "例: <strong>elonmusk</strong> → @elonmuskのポストのみ"
+    },
+    "help_to_title": {
+        "message": "宛先検索"
+    },
+    "help_to_desc": {
+        "message": "特定のユーザーに<strong>返信した</strong>ポストを検索します。"
+    },
+    "help_to_example": {
+        "message": "例: <strong>elonmusk</strong> → @elonmusk宛てのリプライ"
+    },
+    "help_mention_title": {
+        "message": "メンション検索"
+    },
+    "help_mention_desc": {
+        "message": "特定のユーザーが<strong>言及された</strong>ポストを検索します。"
+    },
+    "help_mention_example": {
+        "message": "例: <strong>NASA</strong> → @NASAが言及されたポスト"
+    },
+    "help_follows_title": {
+        "message": "フォロー中のみ"
+    },
+    "help_follows_desc": {
+        "message": "自分が<strong>フォローしている</strong>アカウントのポストのみに絞り込みます。"
+    },
+    "help_follows_example": {
+        "message": "※ ログイン中のアカウントのフォロー対象が反映されます"
+    },
+    "help_filterImages_title": {
+        "message": "画像フィルター"
+    },
+    "help_filterImages_desc": {
+        "message": "<strong>画像を含む</strong>ポストのみを表示します。"
+    },
+    "help_filterImages_example": {
+        "message": "写真やイラストが含まれるポストを検索したい時に便利"
+    },
+    "help_filterVideos_title": {
+        "message": "動画フィルター"
+    },
+    "help_filterVideos_desc": {
+        "message": "<strong>動画を含む</strong>ポストのみを表示します。YouTubeリンクを含むポストも対象。"
+    },
+    "help_filterVideos_example": {
+        "message": "動画コンテンツを探したい時に使用"
+    },
+    "help_filterMedia_title": {
+        "message": "メディアフィルター"
+    },
+    "help_filterMedia_desc": {
+        "message": "画像・動画・GIFなど<strong>何らかのメディア</strong>を含むポストを表示します。"
+    },
+    "help_filterMedia_example": {
+        "message": "テキストのみのポストを除外したい時に便利"
+    },
+    "help_filterLinks_title": {
+        "message": "リンクフィルター"
+    },
+    "help_filterLinks_desc": {
+        "message": "<strong>URLを含む</strong>ポストのみを表示します。"
+    },
+    "help_filterLinks_example": {
+        "message": "外部リンクが共有されているポストを検索"
+    },
+    "help_filterVerified_title": {
+        "message": "認証済みフィルター"
+    },
+    "help_filterVerified_desc": {
+        "message": "<strong>認証バッジ付き</strong>アカウントのポストのみを表示します。"
+    },
+    "help_filterVerified_example": {
+        "message": "公式・認証アカウントの投稿に絞りたい時に"
+    },
+    "help_excludeReplies_title": {
+        "message": "リプライ除外"
+    },
+    "help_excludeReplies_desc": {
+        "message": "リプライ（返信）を<strong>除外</strong>して、元のポストのみを表示します。"
+    },
+    "help_excludeReplies_example": {
+        "message": "会話ではなく独立したポストだけを見たい時に"
+    },
+    "help_excludeRetweets_title": {
+        "message": "リツイート除外"
+    },
+    "help_excludeRetweets_desc": {
+        "message": "リツイート（リポスト）を<strong>除外</strong>して、オリジナルのポストのみを表示します。"
+    },
+    "help_excludeRetweets_example": {
+        "message": "重複を減らしてオリジナルの投稿だけを見たい時に"
+    },
+    "help_filterQuote_title": {
+        "message": "引用ツイートのみ"
+    },
+    "help_filterQuote_desc": {
+        "message": "<strong>引用ツイート</strong>（引用リポスト）のみを表示します。"
+    },
+    "help_filterQuote_example": {
+        "message": "他の人のポストに対するコメント付きリポストを検索"
+    },
+    "help_url_title": {
+        "message": "URL指定検索"
+    },
+    "help_url_desc": {
+        "message": "特定の<strong>URLを含む</strong>ポストを検索します。ドメイン名やURLの一部を入力。"
+    },
+    "help_url_example": {
+        "message": "例: <strong>example.com</strong> → example.comへのリンクを含むポスト"
+    },
+    "help_since_title": {
+        "message": "開始日指定"
+    },
+    "help_since_desc": {
+        "message": "指定した日付<strong>以降</strong>のポストを検索します。"
+    },
+    "help_since_example": {
+        "message": "例: 2025-01-01 → 2025年1月1日以降のポスト"
+    },
+    "help_until_title": {
+        "message": "終了日指定"
+    },
+    "help_until_desc": {
+        "message": "指定した日付<strong>以前</strong>のポストを検索します。since:と組み合わせて期間指定が可能。"
+    },
+    "help_until_example": {
+        "message": "例: since:2025-01-01 + until:2025-12-31 → 2025年のポスト"
+    },
+    "help_minFaves_title": {
+        "message": "最小いいね数"
+    },
+    "help_minFaves_desc": {
+        "message": "指定した数<strong>以上のいいね</strong>があるポストのみを表示します。"
+    },
+    "help_minFaves_example": {
+        "message": "例: <strong>100</strong> → 100いいね以上のポスト（バズったポストを探すのに便利）"
+    },
+    "help_minRetweets_title": {
+        "message": "最小リツイート数"
+    },
+    "help_minRetweets_desc": {
+        "message": "指定した数<strong>以上のリツイート</strong>があるポストのみを表示します。"
+    },
+    "help_minRetweets_example": {
+        "message": "例: <strong>50</strong> → 50RT以上の拡散されたポスト"
+    },
+    "help_minReplies_title": {
+        "message": "最小リプライ数"
+    },
+    "help_minReplies_desc": {
+        "message": "指定した数<strong>以上のリプライ</strong>があるポストのみを表示します。"
+    },
+    "help_minReplies_example": {
+        "message": "例: <strong>10</strong> → 10件以上の返信がある議論の盛り上がったポスト"
+    },
+    "help_lang_title": {
+        "message": "言語指定"
+    },
+    "help_lang_desc": {
+        "message": "指定した<strong>言語</strong>のポストのみを表示します。ISO 639-1言語コードを使用。"
+    },
+    "help_lang_example": {
+        "message": "例: <strong>ja</strong> → 日本語のポストのみ"
+    },
+    "help_near_title": {
+        "message": "場所指定"
+    },
+    "help_near_desc": {
+        "message": "指定した<strong>都市・場所の近く</strong>から投稿されたポストを検索します。"
+    },
+    "help_near_example": {
+        "message": "例: <strong>Tokyo</strong> → 東京付近からの投稿（※精度は限定的）"
+    },
+    "help_within_title": {
+        "message": "範囲指定"
+    },
+    "help_within_desc": {
+        "message": "<strong>near:と組み合わせて</strong>、検索範囲の半径を指定します。kmまたはmiが使用可能。"
+    },
+    "help_within_example": {
+        "message": "例: <strong>10km</strong> → near:で指定した場所から半径10km以内"
+    }
+}

@@ -1,0 +1,470 @@
+{
+    "appName": {
+        "message": "X Search Helper"
+    },
+    "appDesc": {
+        "message": "Chrome extension to easily create advanced search queries for X (formerly Twitter)."
+    },
+    "headerTitle": {
+        "message": "Search Helper"
+    },
+    "themeToggleTitle": {
+        "message": "Toggle Theme"
+    },
+    "resetBtnTitle": {
+        "message": "Reset"
+    },
+    "queryPreviewLabel": {
+        "message": "Generated Query"
+    },
+    "queryPreviewDefault": {
+        "message": "Please enter search options..."
+    },
+    "searchBtn": {
+        "message": "Search on X"
+    },
+    "copyBtnTitle": {
+        "message": "Copy Query"
+    },
+    "settingsTitle": {
+        "message": "Extension Settings"
+    },
+    "settingFollowBtn": {
+        "message": "➕ Always show Follow button"
+    },
+    "settingFollowBtnDesc": {
+        "message": "Display follow buttons directly on timeline posts."
+    },
+    "catKeywords": {
+        "message": "Keywords & Phrases"
+    },
+    "lblKeywords": {
+        "message": "Keywords"
+    },
+    "hintKeywordsAND": {
+        "message": "Space-separated (AND)"
+    },
+    "plhKeywords": {
+        "message": "e.g., programming AI"
+    },
+    "lblExactMatch": {
+        "message": "Exact Phrase"
+    },
+    "plhExactMatch": {
+        "message": "e.g., machine learning"
+    },
+    "lblOR": {
+        "message": "OR Search"
+    },
+    "hintOR": {
+        "message": "Contains any of these"
+    },
+    "plhOR": {
+        "message": "e.g., Python,JavaScript (comma-separated)"
+    },
+    "lblExclude": {
+        "message": "Exclude Words"
+    },
+    "plhExclude": {
+        "message": "e.g., ad,PR (comma-separated)"
+    },
+    "lblHashtag": {
+        "message": "Hashtag"
+    },
+    "plhHashtag": {
+        "message": "e.g., AI (no # needed)"
+    },
+    "lblCashtag": {
+        "message": "Cashtag"
+    },
+    "hintCashtag": {
+        "message": "Stock tickers etc."
+    },
+    "plhCashtag": {
+        "message": "e.g., TSLA (no $ needed)"
+    },
+    "catUsers": {
+        "message": "Users"
+    },
+    "lblFrom": {
+        "message": "From"
+    },
+    "plhFrom": {
+        "message": "e.g., elonmusk (no @ needed)"
+    },
+    "lblTo": {
+        "message": "To"
+    },
+    "plhTo": {
+        "message": "e.g., elonmusk (no @ needed)"
+    },
+    "lblMention": {
+        "message": "Mentions"
+    },
+    "plhMention": {
+        "message": "e.g., NASA (no @ needed)"
+    },
+    "lblFilterFollows": {
+        "message": "👥 Followed users only"
+    },
+    "catFilters": {
+        "message": "Content Filters"
+    },
+    "lblFilterImages": {
+        "message": "🖼️ Contains Images"
+    },
+    "lblFilterVideos": {
+        "message": "🎬 Contains Videos"
+    },
+    "lblFilterMedia": {
+        "message": "📎 Contains Any Media"
+    },
+    "lblFilterLinks": {
+        "message": "🔗 Contains Links"
+    },
+    "lblFilterVerified": {
+        "message": "✅ Verified Only"
+    },
+    "lblExcludeReplies": {
+        "message": "💬 Exclude Replies"
+    },
+    "lblExcludeRetweets": {
+        "message": "🔄 Exclude Retweets"
+    },
+    "lblFilterQuote": {
+        "message": "💭 Quote reposts only"
+    },
+    "lblUrl": {
+        "message": "URL filter"
+    },
+    "plhUrl": {
+        "message": "e.g., example.com"
+    },
+    "catDates": {
+        "message": "Dates"
+    },
+    "lblSince": {
+        "message": "Since"
+    },
+    "lblUntil": {
+        "message": "Until"
+    },
+    "catEngagement": {
+        "message": "Engagement"
+    },
+    "lblMinFaves": {
+        "message": "Min Likes"
+    },
+    "plhMinFaves": {
+        "message": "e.g., 100"
+    },
+    "lblMinRetweets": {
+        "message": "Min Retweets"
+    },
+    "plhMinRetweets": {
+        "message": "e.g., 50"
+    },
+    "lblMinReplies": {
+        "message": "Min Replies"
+    },
+    "plhMinReplies": {
+        "message": "e.g., 10"
+    },
+    "catLocale": {
+        "message": "Language & Location"
+    },
+    "lblLang": {
+        "message": "Language"
+    },
+    "optLangAny": {
+        "message": "Any"
+    },
+    "lblNear": {
+        "message": "Near location"
+    },
+    "plhNear": {
+        "message": "e.g., Tokyo"
+    },
+    "lblWithin": {
+        "message": "Within radius"
+    },
+    "plhWithin": {
+        "message": "e.g., 10km"
+    },
+    "donateBtn": {
+        "message": "☕ Support"
+    },
+    "toastCopied": {
+        "message": "Query copied to clipboard"
+    },
+    "toastReset": {
+        "message": "Form reset"
+    },
+    "toastFollowOn": {
+        "message": "Follow buttons are now visible"
+    },
+    "toastFollowOff": {
+        "message": "Follow buttons are now hidden"
+    },
+    "btnFollow": {
+        "message": "Follow"
+    },
+    "btnFollowing": {
+        "message": "Following"
+    },
+    "btnUnfollow": {
+        "message": "Unfollow"
+    },
+    "btnLoading": {
+        "message": "Loading..."
+    },
+    "titleFollow": {
+        "message": "Follow user"
+    },
+    "titleUnfollow": {
+        "message": "Unfollow user"
+    },
+    "help_keywords_title": {
+        "message": "Keyword Search (AND)"
+    },
+    "help_keywords_desc": {
+        "message": "Find posts containing <strong>ALL</strong> of the keywords. Separate words with spaces."
+    },
+    "help_keywords_example": {
+        "message": "Example: <strong>programming AI</strong> → contains both 'programming' and 'AI'"
+    },
+    "help_exact_title": {
+        "message": "Exact Phrase Search"
+    },
+    "help_exact_desc": {
+        "message": "Find posts containing the <strong>exact</strong> phrase and word order."
+    },
+    "help_exact_example": {
+        "message": "Example: <strong>\"machine learning\"</strong> → contains the exact phrase"
+    },
+    "help_or_title": {
+        "message": "OR Search"
+    },
+    "help_or_desc": {
+        "message": "Find posts containing <strong>ANY</strong> of the keywords. Separate with commas."
+    },
+    "help_or_example": {
+        "message": "Example: <strong>Python,JavaScript</strong> → translated to 'Python OR JavaScript'"
+    },
+    "help_exclude_title": {
+        "message": "Exclude Words"
+    },
+    "help_exclude_desc": {
+        "message": "<strong>Exclude</strong> posts containing these words. Separate with commas."
+    },
+    "help_exclude_example": {
+        "message": "Example: <strong>ad,PR</strong> → translated to '-ad -PR'"
+    },
+    "help_hashtag_title": {
+        "message": "Hashtag Search"
+    },
+    "help_hashtag_desc": {
+        "message": "Find posts with specific <strong>hashtags</strong>. the '#' is added automatically."
+    },
+    "help_hashtag_example": {
+        "message": "Example: <strong>AI</strong> → posts containing '#AI'"
+    },
+    "help_cashtag_title": {
+        "message": "Cashtag Search"
+    },
+    "help_cashtag_desc": {
+        "message": "Find <strong>stock ticker symbols</strong> or cryptos starting with $. The '$' is added automatically."
+    },
+    "help_cashtag_example": {
+        "message": "Example: <strong>TSLA</strong> → posts containing '$TSLA'"
+    },
+    "help_from_title": {
+        "message": "Search by Author"
+    },
+    "help_from_desc": {
+        "message": "Find posts <strong>from</strong> a specific user. '@' is not needed."
+    },
+    "help_from_example": {
+        "message": "Example: <strong>elonmusk</strong> → only posts from @elonmusk"
+    },
+    "help_to_title": {
+        "message": "Search by Recipient"
+    },
+    "help_to_desc": {
+        "message": "Find posts <strong>replying to</strong> a specific user."
+    },
+    "help_to_example": {
+        "message": "Example: <strong>elonmusk</strong> → replies to @elonmusk"
+    },
+    "help_mention_title": {
+        "message": "Search Mentions"
+    },
+    "help_mention_desc": {
+        "message": "Find posts <strong>mentioning</strong> a specific user."
+    },
+    "help_mention_example": {
+        "message": "Example: <strong>NASA</strong> → posts mentioning @NASA"
+    },
+    "help_follows_title": {
+        "message": "Followed Users Only"
+    },
+    "help_follows_desc": {
+        "message": "Limit search to only accounts that you <strong>currently follow</strong>."
+    },
+    "help_follows_example": {
+        "message": "Note: Applies to the currently logged in X account"
+    },
+    "help_filterImages_title": {
+        "message": "Image Filter"
+    },
+    "help_filterImages_desc": {
+        "message": "Show posts that <strong>contain images</strong>."
+    },
+    "help_filterImages_example": {
+        "message": "Useful for finding photos or illustrations"
+    },
+    "help_filterVideos_title": {
+        "message": "Video Filter"
+    },
+    "help_filterVideos_desc": {
+        "message": "Show posts that <strong>contain videos</strong> (including YouTube links)."
+    },
+    "help_filterVideos_example": {
+        "message": "Useful for finding video content"
+    },
+    "help_filterMedia_title": {
+        "message": "Media Filter"
+    },
+    "help_filterMedia_desc": {
+        "message": "Show posts that contain <strong>any kind of media</strong> (images, videos, GIFs)."
+    },
+    "help_filterMedia_example": {
+        "message": "Useful for excluding text-only posts"
+    },
+    "help_filterLinks_title": {
+        "message": "Link Filter"
+    },
+    "help_filterLinks_desc": {
+        "message": "Show posts that <strong>contain links</strong>."
+    },
+    "help_filterLinks_example": {
+        "message": "Useful for finding shared external articles"
+    },
+    "help_filterVerified_title": {
+        "message": "Verified Filter"
+    },
+    "help_filterVerified_desc": {
+        "message": "Show only posts from <strong>verified accounts</strong> (with badges)."
+    },
+    "help_filterVerified_example": {
+        "message": "Useful for filtering out noise"
+    },
+    "help_excludeReplies_title": {
+        "message": "Exclude Replies"
+    },
+    "help_excludeReplies_desc": {
+        "message": "<strong>Exclude</strong> replies and show only original posts."
+    },
+    "help_excludeReplies_example": {
+        "message": "Useful for reading independent posts rather than conversations"
+    },
+    "help_excludeRetweets_title": {
+        "message": "Exclude Retweets"
+    },
+    "help_excludeRetweets_desc": {
+        "message": "<strong>Exclude</strong> retweets/reposts and show only original posts."
+    },
+    "help_excludeRetweets_example": {
+        "message": "Useful for reducing duplicates"
+    },
+    "help_filterQuote_title": {
+        "message": "Quote Reposts Only"
+    },
+    "help_filterQuote_desc": {
+        "message": "Show only <strong>quote reposts</strong> (reposts with comments)."
+    },
+    "help_filterQuote_example": {
+        "message": "Useful for finding commentary on other posts"
+    },
+    "help_url_title": {
+        "message": "URL Search"
+    },
+    "help_url_desc": {
+        "message": "Find posts containing a specific <strong>URL or domain</strong>."
+    },
+    "help_url_example": {
+        "message": "Example: <strong>example.com</strong> → posts linking to example.com"
+    },
+    "help_since_title": {
+        "message": "Since Date"
+    },
+    "help_since_desc": {
+        "message": "Find posts published <strong>on or after</strong> this date."
+    },
+    "help_since_example": {
+        "message": "Example: 2025-01-01 → posts from Jan 1, 2025 onwards"
+    },
+    "help_until_title": {
+        "message": "Until Date"
+    },
+    "help_until_desc": {
+        "message": "Find posts published <strong>on or before</strong> this date. Can be combined with Since."
+    },
+    "help_until_example": {
+        "message": "Example: since:2025-01-01 + until:2025-12-31 → posts within 2025"
+    },
+    "help_minFaves_title": {
+        "message": "Minimum Likes"
+    },
+    "help_minFaves_desc": {
+        "message": "Show posts with <strong>at least this many likes</strong>."
+    },
+    "help_minFaves_example": {
+        "message": "Example: <strong>100</strong> → posts with 100+ likes (viral posts)"
+    },
+    "help_minRetweets_title": {
+        "message": "Minimum Retweets"
+    },
+    "help_minRetweets_desc": {
+        "message": "Show posts with <strong>at least this many retweets</strong>."
+    },
+    "help_minRetweets_example": {
+        "message": "Example: <strong>50</strong> → widely shared posts"
+    },
+    "help_minReplies_title": {
+        "message": "Minimum Replies"
+    },
+    "help_minReplies_desc": {
+        "message": "Show posts with <strong>at least this many replies</strong>."
+    },
+    "help_minReplies_example": {
+        "message": "Example: <strong>10</strong> → highly discussed posts"
+    },
+    "help_lang_title": {
+        "message": "Language"
+    },
+    "help_lang_desc": {
+        "message": "Filter posts by <strong>language</strong> using ISO 639-1 language codes."
+    },
+    "help_lang_example": {
+        "message": "Example: <strong>en</strong> → only English posts"
+    },
+    "help_near_title": {
+        "message": "Location"
+    },
+    "help_near_desc": {
+        "message": "Find posts sent <strong>near</strong> a specific city or location."
+    },
+    "help_near_example": {
+        "message": "Example: <strong>Tokyo</strong> → posts near Tokyo (note: accuracy varies)"
+    },
+    "help_within_title": {
+        "message": "Range"
+    },
+    "help_within_desc": {
+        "message": "Specify the search radius. <strong>Must be used with 'near:'</strong>. Accepts km or mi."
+    },
+    "help_within_example": {
+        "message": "Example: <strong>10km</strong> → within a 10km radius of the 'near' location"
+    }
+}

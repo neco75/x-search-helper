@@ -62,7 +62,7 @@
 }
 
 .xsh-follow-btn.xsh-following:hover .xsh-btn-text::after {
-    content: 'フォロー解除';
+    content: attr(data-text-unfollow);
     font-size: 13px;
 }
 

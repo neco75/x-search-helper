@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "X Search Helper",
+  "default_locale": "ja",
+  "name": "__MSG_appName__",
   "version": "1.3.0",
-  "description": "X（旧Twitter）の検索オプションを簡単に使えるChrome拡張機能",
+  "description": "__MSG_appDesc__",
   "permissions": [
     "tabs",
     "storage"
@@ -33,6 +34,17 @@
         "content.css"
       ],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "_locales/*/messages.json"
+      ],
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ]
     }
   ]
 }
