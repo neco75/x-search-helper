@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgBlur = document.getElementById('bgBlur');
     const bgBlurValue = document.getElementById('bgBlurValue');
 
-    const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
+    const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
 
     // コントロールパネルの表示/非表示
     function toggleBgControls(enabled) {

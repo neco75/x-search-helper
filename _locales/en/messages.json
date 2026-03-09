@@ -495,6 +495,6 @@
         "message": "Background image removed"
     },
     "toastBgImageTooLarge": {
-        "message": "Image too large (max 2MB)"
+        "message": "Image too large (max 5MB)"
     }
 }

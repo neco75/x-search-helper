@@ -495,6 +495,6 @@
         "message": "背景画像を削除しました"
     },
     "toastBgImageTooLarge": {
-        "message": "画像サイズが大きすぎます（最大2MB）"
+        "message": "画像サイズが大きすぎます（最大5MB）"
     }
 }
