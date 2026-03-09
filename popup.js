@@ -492,6 +492,113 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // =============================================
+    // 背景画像カスタマイズ
+    // =============================================
+    const enableBgImage = document.getElementById('enableBgImage');
+    const bgImageControls = document.getElementById('bgImageControls');
+    const bgImageFile = document.getElementById('bgImageFile');
+    const bgImagePreview = document.getElementById('bgImagePreview');
+    const bgImageClear = document.getElementById('bgImageClear');
+    const bgOpacity = document.getElementById('bgOpacity');
+    const bgOpacityValue = document.getElementById('bgOpacityValue');
+    const bgBlur = document.getElementById('bgBlur');
+    const bgBlurValue = document.getElementById('bgBlurValue');
+
+    const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
+
+    // コントロールパネルの表示/非表示
+    function toggleBgControls(enabled) {
+        bgImageControls.style.display = enabled ? 'block' : 'none';
+    }
+
+    // プレビューに画像を表示
+    function showBgPreview(dataUrl) {
+        if (dataUrl) {
+            bgImagePreview.innerHTML = `<img src="${dataUrl}" alt="preview">`;
+            bgImagePreview.classList.add('has-image');
+        } else {
+            bgImagePreview.innerHTML = `<span class="bg-image-placeholder" data-i18n="bgImageNoImage">${getMessage('bgImageNoImage') || '画像が選択されていません'}</span>`;
+            bgImagePreview.classList.remove('has-image');
+        }
+    }
+
+    // 保存された背景画像設定を復元
+    chrome.storage.sync.get({
+        enableBgImage: false,
+        bgOpacity: 30,
+        bgBlur: 0
+    }, (syncResult) => {
+        enableBgImage.checked = syncResult.enableBgImage;
+        bgOpacity.value = syncResult.bgOpacity;
+        bgOpacityValue.textContent = syncResult.bgOpacity + '%';
+        bgBlur.value = syncResult.bgBlur;
+        bgBlurValue.textContent = syncResult.bgBlur + 'px';
+        toggleBgControls(syncResult.enableBgImage);
+    });
+
+    // local storageから画像データを復元
+    chrome.storage.local.get({ bgImageData: null }, (localResult) => {
+        if (localResult.bgImageData) {
+            showBgPreview(localResult.bgImageData);
+        }
+    });
+
+    // トグル変更
+    enableBgImage.addEventListener('change', () => {
+        const enabled = enableBgImage.checked;
+        toggleBgControls(enabled);
+        chrome.storage.sync.set({ enableBgImage: enabled });
+    });
+
+    // ファイル選択
+    bgImageFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // サイズチェック
+        if (file.size > MAX_IMAGE_SIZE) {
+            showToast(getMessage('toastBgImageTooLarge'));
+            bgImageFile.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const dataUrl = event.target.result;
+            showBgPreview(dataUrl);
+            chrome.storage.local.set({ bgImageData: dataUrl }, () => {
+                showToast(getMessage('toastBgImageSet'));
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // 画像クリア
+    bgImageClear.addEventListener('click', () => {
+        showBgPreview(null);
+        bgImageFile.value = '';
+        chrome.storage.local.remove('bgImageData', () => {
+            showToast(getMessage('toastBgImageCleared'));
+        });
+    });
+
+    // 透過率スライダー
+    bgOpacity.addEventListener('input', () => {
+        bgOpacityValue.textContent = bgOpacity.value + '%';
+    });
+    bgOpacity.addEventListener('change', () => {
+        chrome.storage.sync.set({ bgOpacity: parseInt(bgOpacity.value) });
+    });
+
+    // ぼかしスライダー
+    bgBlur.addEventListener('input', () => {
+        bgBlurValue.textContent = bgBlur.value + 'px';
+    });
+    bgBlur.addEventListener('change', () => {
+        chrome.storage.sync.set({ bgBlur: parseInt(bgBlur.value) });
+    });
+
     // 初期状態を設定
     updatePreview();
 });

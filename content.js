@@ -10,6 +10,12 @@
     let isEnabled = false;
     let observer = null;
 
+    // 背景画像設定
+    let bgImageEnabled = false;
+    let bgOpacity = 30;
+    let bgBlur = 0;
+    let bgImageData = null;
+
     // フォロー状態キャッシュ: { username: { following: bool, userId: string } }
     const followCache = new Map();
 
@@ -52,10 +58,16 @@
         return new Promise((resolve) => {
             chrome.storage.sync.get({
                 showFollowButton: false,
-                appLang: getDefaultLang()
+                appLang: getDefaultLang(),
+                enableBgImage: false,
+                bgOpacity: 30,
+                bgBlur: 0
             }, async (result) => {
                 isEnabled = result.showFollowButton;
                 currentLang = result.appLang;
+                bgImageEnabled = result.enableBgImage;
+                bgOpacity = result.bgOpacity;
+                bgBlur = result.bgBlur;
                 await loadTranslations(currentLang);
                 resolve(isEnabled);
             });
@@ -357,27 +369,86 @@
     }
 
     // =============================================
+    // 背景画像オーバーレイ
+    // =============================================
+    function createOrUpdateBgOverlay() {
+        let overlay = document.getElementById('xsh-bg-overlay');
+
+        if (!bgImageEnabled || !bgImageData) {
+            if (overlay) overlay.remove();
+            return;
+        }
+
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'xsh-bg-overlay';
+            document.body.prepend(overlay);
+        }
+
+        overlay.style.backgroundImage = `url(${bgImageData})`;
+        overlay.style.opacity = bgOpacity / 100;
+        overlay.style.filter = bgBlur > 0 ? `blur(${bgBlur}px)` : 'none';
+    }
+
+    function removeBgOverlay() {
+        const overlay = document.getElementById('xsh-bg-overlay');
+        if (overlay) overlay.remove();
+    }
+
+    function loadBgImageData() {
+        return new Promise((resolve) => {
+            chrome.storage.local.get({ bgImageData: null }, (result) => {
+                bgImageData = result.bgImageData;
+                resolve();
+            });
+        });
+    }
+
+    // =============================================
     // 設定変更のリスナー
     // =============================================
     chrome.storage.onChanged.addListener(async (changes, namespace) => {
-        if (namespace !== 'sync') return;
+        // sync storage の変更
+        if (namespace === 'sync') {
+            // フォローボタン表示設定が変更された場合
+            if (changes.showFollowButton) {
+                isEnabled = changes.showFollowButton.newValue;
+                if (isEnabled) {
+                    processAllArticles();
+                } else {
+                    removeAllFollowButtons();
+                }
+            }
 
-        // フォローボタン表示設定が変更された場合
-        if (changes.showFollowButton) {
-            isEnabled = changes.showFollowButton.newValue;
-            if (isEnabled) {
-                processAllArticles();
-            } else {
-                removeAllFollowButtons();
+            // 言語設定が変更された場合
+            if (changes.appLang && changes.appLang.newValue !== currentLang) {
+                currentLang = changes.appLang.newValue;
+                await loadTranslations(currentLang);
+                if (isEnabled) {
+                    refreshAllButtonTexts();
+                }
+            }
+
+            // 背景画像設定が変更された場合
+            if (changes.enableBgImage !== undefined) {
+                bgImageEnabled = changes.enableBgImage.newValue;
+                createOrUpdateBgOverlay();
+            }
+            if (changes.bgOpacity !== undefined) {
+                bgOpacity = changes.bgOpacity.newValue;
+                createOrUpdateBgOverlay();
+            }
+            if (changes.bgBlur !== undefined) {
+                bgBlur = changes.bgBlur.newValue;
+                createOrUpdateBgOverlay();
             }
         }
 
-        // 言語設定が変更された場合
-        if (changes.appLang && changes.appLang.newValue !== currentLang) {
-            currentLang = changes.appLang.newValue;
-            await loadTranslations(currentLang);
-            if (isEnabled) {
-                refreshAllButtonTexts();
+        // local storage の変更（背景画像データ）
+        if (namespace === 'local') {
+            if (changes.bgImageData !== undefined) {
+                bgImageData = changes.bgImageData.newValue || null;
+                createOrUpdateBgOverlay();
             }
         }
     });
@@ -391,6 +462,10 @@
             processAllArticles();
         }
         startObserver();
+
+        // 背景画像の初期化
+        await loadBgImageData();
+        createOrUpdateBgOverlay();
     }
 
     if (document.readyState === 'loading') {

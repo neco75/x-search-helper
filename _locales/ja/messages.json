@@ -466,5 +466,35 @@
     },
     "help_within_example": {
         "message": "例: <strong>10km</strong> → near:で指定した場所から半径10km以内"
+    },
+    "settingBgImage": {
+        "message": "🖼️ 背景画像カスタマイズ"
+    },
+    "settingBgImageDesc": {
+        "message": "Xの背景に好きな画像を表示します"
+    },
+    "bgImageBrowse": {
+        "message": "📂 画像を選択"
+    },
+    "bgImageClear": {
+        "message": "🗑️ 画像を削除"
+    },
+    "bgImageOpacity": {
+        "message": "透過率"
+    },
+    "bgImageBlur": {
+        "message": "ぼかし"
+    },
+    "bgImageNoImage": {
+        "message": "画像が選択されていません"
+    },
+    "toastBgImageSet": {
+        "message": "背景画像を設定しました"
+    },
+    "toastBgImageCleared": {
+        "message": "背景画像を削除しました"
+    },
+    "toastBgImageTooLarge": {
+        "message": "画像サイズが大きすぎます（最大2MB）"
     }
 }

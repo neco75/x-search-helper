@@ -85,6 +85,55 @@
             <span class="switch-slider"></span>
           </div>
         </label>
+
+        <!-- 背景画像カスタマイズ -->
+        <div class="bg-image-section">
+          <label class="setting-item" for="enableBgImage">
+            <div class="setting-info">
+              <span class="setting-label" data-i18n="settingBgImage">🖼️ 背景画像カスタマイズ</span>
+              <span class="setting-desc" data-i18n="settingBgImageDesc">Xの背景に好きな画像を表示します</span>
+            </div>
+            <div class="switch-wrapper">
+              <input type="checkbox" id="enableBgImage" class="switch-input">
+              <span class="switch-slider"></span>
+            </div>
+          </label>
+
+          <div id="bgImageControls" class="bg-image-controls" style="display:none;">
+            <!-- 画像選択 -->
+            <div class="bg-image-picker">
+              <div id="bgImagePreview" class="bg-image-preview">
+                <span class="bg-image-placeholder" data-i18n="bgImageNoImage">画像が選択されていません</span>
+              </div>
+              <div class="bg-image-actions">
+                <label class="bg-image-browse-btn" for="bgImageFile">
+                  <span data-i18n="bgImageBrowse">📂 画像を選択</span>
+                  <input type="file" id="bgImageFile" accept="image/*" style="display:none;">
+                </label>
+                <button id="bgImageClear" class="bg-image-clear-btn" data-i18n="bgImageClear">🗑️ 画像を削除</button>
+              </div>
+            </div>
+
+            <!-- 透過率スライダー -->
+            <div class="bg-slider-group">
+              <label class="bg-slider-label">
+                <span data-i18n="bgImageOpacity">透過率</span>
+                <span id="bgOpacityValue" class="bg-slider-value">30%</span>
+              </label>
+              <input type="range" id="bgOpacity" class="bg-slider" min="0" max="100" value="30">
+            </div>
+
+            <!-- ぼかしスライダー -->
+            <div class="bg-slider-group">
+              <label class="bg-slider-label">
+                <span data-i18n="bgImageBlur">ぼかし</span>
+                <span id="bgBlurValue" class="bg-slider-value">0px</span>
+              </label>
+              <input type="range" id="bgBlur" class="bg-slider" min="0" max="20" value="0">
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -374,7 +423,7 @@
     <!-- フッター -->
     <footer class="footer">
       <a href="https://ko-fi.com/neco75" target="_blank" class="donate-btn" data-i18n="donateBtn">☕ 応援する</a>
-      <span>X Search Helper v1.3</span>
+      <span>X Search Helper v1.5</span>
     </footer>
   </div>
 

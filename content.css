@@ -88,3 +88,20 @@
 .xsh-btn-text {
     pointer-events: none;
 }
+
+/* =============================================
+   Background Image Overlay
+   ============================================= */
+#xsh-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}

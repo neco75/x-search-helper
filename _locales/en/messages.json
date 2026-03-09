@@ -466,5 +466,35 @@
     },
     "help_within_example": {
         "message": "Example: <strong>10km</strong> → within a 10km radius of the 'near' location"
+    },
+    "settingBgImage": {
+        "message": "🖼️ Background Image"
+    },
+    "settingBgImageDesc": {
+        "message": "Display a custom background image on X"
+    },
+    "bgImageBrowse": {
+        "message": "📂 Choose Image"
+    },
+    "bgImageClear": {
+        "message": "🗑️ Remove Image"
+    },
+    "bgImageOpacity": {
+        "message": "Opacity"
+    },
+    "bgImageBlur": {
+        "message": "Blur"
+    },
+    "bgImageNoImage": {
+        "message": "No image selected"
+    },
+    "toastBgImageSet": {
+        "message": "Background image set"
+    },
+    "toastBgImageCleared": {
+        "message": "Background image removed"
+    },
+    "toastBgImageTooLarge": {
+        "message": "Image too large (max 2MB)"
     }
 }
