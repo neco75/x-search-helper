@@ -405,6 +405,31 @@
     }
 
     // =============================================
+    // ポップアップからのメッセージリスナー（即時反映用）
+    // =============================================
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if (message.type === 'xsh-bg-update') {
+            // 最新の設定を再読み込みして反映
+            chrome.storage.sync.get({
+                enableBgImage: false,
+                bgOpacity: 30,
+                bgBlur: 0
+            }, (syncResult) => {
+                bgImageEnabled = syncResult.enableBgImage;
+                bgOpacity = syncResult.bgOpacity;
+                bgBlur = syncResult.bgBlur;
+
+                chrome.storage.local.get({ bgImageData: null }, (localResult) => {
+                    bgImageData = localResult.bgImageData;
+                    createOrUpdateBgOverlay();
+                    sendResponse({ ok: true });
+                });
+            });
+            return true; // 非同期レスポンスのために必要
+        }
+    });
+
+    // =============================================
     // 設定変更のリスナー
     // =============================================
     chrome.storage.onChanged.addListener(async (changes, namespace) => {

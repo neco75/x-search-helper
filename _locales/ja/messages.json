@@ -496,5 +496,8 @@
     },
     "toastBgImageTooLarge": {
         "message": "画像サイズが大きすぎます（最大5MB）"
+    },
+    "toastBgNeedReload": {
+        "message": "Xのページをリロードして反映してください"
     }
 }

@@ -507,6 +507,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
 
+    // Xのタブに背景画像の設定変更を通知
+    function notifyBgChange() {
+        chrome.tabs.query({ url: ['https://x.com/*', 'https://twitter.com/*'] }, (tabs) => {
+            if (!tabs || tabs.length === 0) return;
+            tabs.forEach(tab => {
+                chrome.tabs.sendMessage(tab.id, { type: 'xsh-bg-update' }).catch(() => {
+                    // content scriptが未読み込みの場合、リロードを促す
+                    showToast(getMessage('toastBgNeedReload') || 'Xのページをリロードしてください');
+                });
+            });
+        });
+    }
+
     // コントロールパネルの表示/非表示
     function toggleBgControls(enabled) {
         bgImageControls.style.display = enabled ? 'block' : 'none';
@@ -548,7 +561,9 @@ document.addEventListener('DOMContentLoaded', () => {
     enableBgImage.addEventListener('change', () => {
         const enabled = enableBgImage.checked;
         toggleBgControls(enabled);
-        chrome.storage.sync.set({ enableBgImage: enabled });
+        chrome.storage.sync.set({ enableBgImage: enabled }, () => {
+            notifyBgChange();
+        });
     });
 
     // ファイル選択
@@ -569,6 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showBgPreview(dataUrl);
             chrome.storage.local.set({ bgImageData: dataUrl }, () => {
                 showToast(getMessage('toastBgImageSet'));
+                notifyBgChange();
             });
         };
         reader.readAsDataURL(file);
@@ -580,6 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bgImageFile.value = '';
         chrome.storage.local.remove('bgImageData', () => {
             showToast(getMessage('toastBgImageCleared'));
+            notifyBgChange();
         });
     });
 
@@ -588,7 +605,9 @@ document.addEventListener('DOMContentLoaded', () => {
         bgOpacityValue.textContent = bgOpacity.value + '%';
     });
     bgOpacity.addEventListener('change', () => {
-        chrome.storage.sync.set({ bgOpacity: parseInt(bgOpacity.value) });
+        chrome.storage.sync.set({ bgOpacity: parseInt(bgOpacity.value) }, () => {
+            notifyBgChange();
+        });
     });
 
     // ぼかしスライダー
@@ -596,7 +615,9 @@ document.addEventListener('DOMContentLoaded', () => {
         bgBlurValue.textContent = bgBlur.value + 'px';
     });
     bgBlur.addEventListener('change', () => {
-        chrome.storage.sync.set({ bgBlur: parseInt(bgBlur.value) });
+        chrome.storage.sync.set({ bgBlur: parseInt(bgBlur.value) }, () => {
+            notifyBgChange();
+        });
     });
 
     // 初期状態を設定
