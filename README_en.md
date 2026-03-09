@@ -20,6 +20,15 @@ It automatically generates complex search queries simply by selecting search opt
 - Multi-language support (Instantly switch between EN/JA from the UI)
 - Real-time preview
 
+### Background Image Customization (v1.5.0~)
+
+A feature that allows you to set your favorite image as the background of the X screen.
+Simply upload an image from the popup, and the background of X will change in real-time.
+
+- **Image Upload** — Set a local image (up to 5MB, JPG/PNG) as the background
+- **Real-time Adjustment** — Intuitively adjust opacity (0~100%) and blur (0~20px) with sliders
+- **One-click ON/OFF & Clear** — Easily revert to the original background at any time
+
 ### Persistent Follow Button (v1.3.0~)
 
 A feature that constantly displays a **Follow/Following button** on each post in your timeline.
